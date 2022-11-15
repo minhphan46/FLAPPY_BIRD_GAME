@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:plappy_bird_game/widgets/barriers.dart';
 import 'package:plappy_bird_game/widgets/bird.dart';
+import 'package:plappy_bird_game/widgets/my_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,16 +15,17 @@ class _HomePageState extends State<HomePage> {
   // game varibles
   int score = 0;
   int bestScore = 0;
+  Color colorBackround = Color.fromARGB(255, 103, 187, 255);
   // bird varibles
   static double birdYaxis = 0;
   double time = 0;
   double height = 0;
   double initialHeight = birdYaxis;
   bool gameHasStated = false;
-  double gravity = -4.9;
+  double gravity = -4.9; // trong luc
   double velocity = 2.8; // van toc
-  double birdWith = 0.1; // out of 2
-  double birdHeight = 0.1; // out of 2
+  double birdWith = 0.15; // out of 2
+  double birdHeight = 0.15; // out of 2
 
   // barrier variables
   static List<double> barrierX = [2, 2 + 1.5]; // position barrier 1, 2
@@ -74,7 +76,7 @@ class _HomePageState extends State<HomePage> {
       if (birdIsDead()) {
         timer.cancel();
         gameHasStated = false;
-        _showDialog();
+        showMyDialog(context, resetGame);
       }
     });
   }
@@ -117,40 +119,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _showDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.brown,
-          title: const Center(
-            child: Text(
-              "G A M E  O V E R",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          actions: [
-            GestureDetector(
-              onTap: resetGame,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Container(
-                  padding: EdgeInsets.all(7),
-                  color: Colors.white,
-                  child: const Text(
-                    "PLAY AGAIN",
-                    style: TextStyle(color: Colors.brown),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -172,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment(
                         0, (2 * birdYaxis + birdHeight) / (2 - birdHeight)),
                     duration: const Duration(milliseconds: 0),
-                    color: Colors.blue,
+                    color: colorBackround,
                     child: Bird(
                       birdWidth: birdWith,
                       birdHeight: birdHeight,
@@ -221,7 +189,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               height: 15,
-              color: Colors.green,
+              color: Color.fromARGB(255, 8, 53, 15),
             ),
             Expanded(
               child: Container(

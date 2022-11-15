@@ -18,13 +18,14 @@ class Barrier extends StatelessWidget {
     return AnimatedContainer(
       duration: Duration(milliseconds: 0),
       alignment: Alignment((2 * barrierX + barrierWidth) / (2 - barrierWidth),
-          isThisBottomBarrier ? 1 : -1),
+          isThisBottomBarrier ? 1.05 : -1.05),
       child: Container(
         width: MediaQuery.of(context).size.width * barrierWidth,
-        height: MediaQuery.of(context).size.width * 3 / 4 * barrierHeight,
+        height: MediaQuery.of(context).size.width * 3 / 4 * barrierHeight + 16,
         decoration: BoxDecoration(
-            color: Colors.green,
-            border: Border.all(width: 10, color: Colors.green.shade700),
+            color: Color.fromARGB(255, 10, 79, 113),
+            border:
+                Border.all(width: 10, color: Color.fromARGB(255, 11, 30, 46)),
             borderRadius: BorderRadius.circular(15)),
       ),
     );

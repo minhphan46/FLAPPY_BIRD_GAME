@@ -10,7 +10,7 @@ class Bird extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.height * birdWidth,
       height: MediaQuery.of(context).size.width * 3 / 4 * birdHeight,
-      child: Image.asset('assets/bird.png'),
+      child: Image.asset('assets/dog.png'),
     );
   }
 }
